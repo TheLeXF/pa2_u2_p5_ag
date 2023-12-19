@@ -1,5 +1,6 @@
 package com.uce.edu;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,18 +8,23 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.edu.repository.ICiudadanoRepository;
 import com.uce.edu.repository.modelo.Alumno;
+import com.uce.edu.repository.modelo.Ciudadano;
+import com.uce.edu.repository.modelo.Empleado;
 import com.uce.edu.repository.modelo.Estudiante;
 import com.uce.edu.service.IAlumnoService;
+import com.uce.edu.service.ICiudadanoService;
+import com.uce.edu.service.IEmpleadoService;
 import com.uce.edu.service.IEstudianteService;
 
 @SpringBootApplication
 public class Pa2U2P5AgApplication implements CommandLineRunner{
 	
 	@Autowired
-	private IEstudianteService estudianteService;
+	private IEmpleadoService empleadoService;
 	@Autowired
-	private IAlumnoService alumnoService;
+	private ICiudadanoService ciudadanoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U2P5AgApplication.class, args);
@@ -27,41 +33,22 @@ public class Pa2U2P5AgApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		
-		//1 Agregar
-		Estudiante e1= new Estudiante();
-		e1.setApellido("Guanoluisa");
-		e1.setNombre("Alexis");
-		e1.setCedula("1727450296");
-		e1.setFechaNacimiento(LocalDateTime.of(1999, 01, 12,11, 25));
-		
-		Alumno a1 = new Alumno();
-		a1.setNombre("Fernando");
+		Ciudadano c1= new Ciudadano();
 		
 		
-		this.alumnoService.agregar(a1);
+		c1.setApellido("Guanoluisa");
+		c1.setNombre("Alexis");
 		
-		//2 Buscar
+		Empleado e1 = new Empleado();
 		
-		this.estudianteService.buscar(6);
-		System.out.println(this.estudianteService.buscar(6));
+		e1.setFechIngreso(LocalDateTime.now());
+		e1.setSalario(new BigDecimal(100.00));
 		
-		this.alumnoService.buscar(1);
-		System.out.println(this.alumnoService.buscar(1));
+		Ciudadano c2 = this.ciudadanoService.buscar(1);
+		e1.setCiudadano(c2);
+		//this.ciudadanoService.agregar(c1);
+		this.empleadoService.agregar(e1);
 		
-		//3 Actualizar
-		Estudiante e2 = this.estudianteService.buscar(5);
-		e2.setApellido("Espin");
-		this.estudianteService.actualizar(e2);
-		
-		Alumno a2 = this.alumnoService.buscar(1);
-		a2.setNombre("Actualizado");
-		this.alumnoService.actualizar(a2);
-		
-		//4 borrar
-		
-		this.estudianteService.borrar(6);
-		this.alumnoService.borrar(1);
 	}
 
 }
