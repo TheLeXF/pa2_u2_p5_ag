@@ -1,30 +1,23 @@
 package com.uce.edu;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.repository.ICiudadanoRepository;
-import com.uce.edu.repository.modelo.Alumno;
-import com.uce.edu.repository.modelo.Ciudadano;
-import com.uce.edu.repository.modelo.Empleado;
-import com.uce.edu.repository.modelo.Estudiante;
-import com.uce.edu.service.IAlumnoService;
-import com.uce.edu.service.ICiudadanoService;
-import com.uce.edu.service.IEmpleadoService;
-import com.uce.edu.service.IEstudianteService;
+import com.uce.edu.repository.modelo.Habitacion;
+import com.uce.edu.repository.modelo.Hotel;
+import com.uce.edu.service.IHotelService;
 
 @SpringBootApplication
 public class Pa2U2P5AgApplication implements CommandLineRunner{
 	
 	@Autowired
-	private IEmpleadoService empleadoService;
-	@Autowired
-	private ICiudadanoService ciudadanoService;
+	private IHotelService hotelService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U2P5AgApplication.class, args);
@@ -33,22 +26,28 @@ public class Pa2U2P5AgApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		Ciudadano c1= new Ciudadano();
+		Hotel h1 = new Hotel();
+		
+		h1.setNombre("Tambo Real");
+		h1.setDireccion("12 de Octubre");
 		
 		
-		c1.setApellido("Guanoluisa");
-		c1.setNombre("Alexis");
+		Habitacion hab1=new Habitacion();
+		hab1.setClase("Economica");
+		hab1.setNumero("A1");
+		hab1.setHotel(h1);
 		
-		Empleado e1 = new Empleado();
+		Habitacion hab2=new Habitacion();
+		hab2.setClase("Presidencial");
+		hab2.setNumero("P1");
+		hab2.setHotel(h1);
 		
-		e1.setFechIngreso(LocalDateTime.now());
-		e1.setSalario(new BigDecimal(100.00));
+		List<Habitacion>Habitaciones = new ArrayList<>();
+		Habitaciones.add(hab1);
+		Habitaciones.add(hab2);
 		
-		Ciudadano c2 = this.ciudadanoService.buscar(1);
-		e1.setCiudadano(c2);
-		//this.ciudadanoService.agregar(c1);
-		this.empleadoService.agregar(e1);
-		
+		h1.setHabitaciones(Habitaciones);
+		this.hotelService.guardar(h1);
 	}
 
 }

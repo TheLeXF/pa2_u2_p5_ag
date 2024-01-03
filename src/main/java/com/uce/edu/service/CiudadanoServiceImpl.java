@@ -22,6 +22,18 @@ public class CiudadanoServiceImpl implements ICiudadanoService{
 		// TODO Auto-generated method stub
 		this.ciudadanoRepository.insertar(ciudadano);
 	}
+
+	@Override
+	public void actualizar(Ciudadano ciudadano) {
+		// TODO Auto-generated method stub
+		this.ciudadanoRepository.actualizar(ciudadano);
+	}
+
+	@Override
+	public void borrar(Integer id) {
+		// TODO Auto-generated method stub
+		this.ciudadanoRepository.eliminar(id);
+	}
 	
 
 }
