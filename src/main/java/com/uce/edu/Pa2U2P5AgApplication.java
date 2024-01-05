@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.edu.repository.modelo.Habitacion;
 import com.uce.edu.repository.modelo.Hotel;
+import com.uce.edu.service.IHabitacionService;
 import com.uce.edu.service.IHotelService;
 
 @SpringBootApplication
@@ -18,6 +19,8 @@ public class Pa2U2P5AgApplication implements CommandLineRunner{
 	
 	@Autowired
 	private IHotelService hotelService;
+	@Autowired
+	private IHabitacionService habitacionService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U2P5AgApplication.class, args);
@@ -26,28 +29,49 @@ public class Pa2U2P5AgApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		Hotel h1 = new Hotel();
+		Hotel htemp= new Hotel();
 		
-		h1.setNombre("Tambo Real");
-		h1.setDireccion("12 de Octubre");
+		htemp.setDireccion("Av. Orellana");
+		htemp.setNombre("Marriot");
+		
+		Habitacion hab4= new Habitacion();
+		hab4.setClase("Ejecutiva Empresarial");
+		hab4.setHotel(htemp);
+		hab4.setNumero("A31");
+		List<Habitacion>Habitaciones2 = new ArrayList<>();
+		Habitaciones2.add(hab4);
+		this.hotelService.guardar(htemp);
 		
 		
-		Habitacion hab1=new Habitacion();
-		hab1.setClase("Economica");
-		hab1.setNumero("A1");
-		hab1.setHotel(h1);
 		
-		Habitacion hab2=new Habitacion();
-		hab2.setClase("Presidencial");
-		hab2.setNumero("P1");
-		hab2.setHotel(h1);
-		
+		Habitacion hab1= new Habitacion();
+		hab1.setClase("Ejecutiva Empresarial");
+		Hotel hb = this.hotelService.buscar(2);
+		hab1.setHotel(hb);
+		hab1.setNumero("A20");
+	
+		Habitacion hab2= new Habitacion();
+		hab2.setClase("Economica");
+		hab2.setHotel(hb);
+		hab2.setNumero("A15");
+
 		List<Habitacion>Habitaciones = new ArrayList<>();
 		Habitaciones.add(hab1);
 		Habitaciones.add(hab2);
 		
-		h1.setHabitaciones(Habitaciones);
-		this.hotelService.guardar(h1);
+		hb.setHabitaciones(Habitaciones);
+		hb.setDireccion("Av. Amazonas");
+		this.hotelService.actualizar(hb);
+		
+		Habitacion hab3= this.habitacionService.buscar(3);
+		hab3.setClase("Pet Friendly");
+		this.habitacionService.actualizar(hab3);
+		
+		this.habitacionService.borrar(1);
+		
+		
+		
+				
 	}
 
 }
