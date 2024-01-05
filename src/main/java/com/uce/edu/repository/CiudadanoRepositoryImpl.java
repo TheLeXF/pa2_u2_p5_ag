@@ -11,5 +11,28 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class CiudadanoRepositoryImpl implements ICiudadanoRepository{
 	
+	@PersistenceContext
+	private EntityManager entityManager;
+	
+	@Override
+	public Ciudadano seleccionar(Integer id) {
+		return this.entityManager.find(Ciudadano.class, id);
+	}
+	
+	@Override
+	public void insertar(Ciudadano ciudadano) {
+		this.entityManager.persist(ciudadano);
+	}
+
+	@Override
+	public void actualizar(Ciudadano ciudadano) {
+		this.entityManager.merge(ciudadano);
+	}
+
+	@Override
+	public void eliminar(Integer id) {
+		Ciudadano ciud = this.seleccionar(id);
+		this.entityManager.remove(ciud);
+	}
 
 }
