@@ -1,17 +1,18 @@
 package com.uce.edu;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.repository.modelo.Autor;
+import com.uce.edu.repository.modelo.Autor2;
+import com.uce.edu.repository.modelo.AutorLibro;
 import com.uce.edu.repository.modelo.Libro;
-import com.uce.edu.service.IAutorService;
+import com.uce.edu.repository.modelo.Libro2;
 import com.uce.edu.service.ILibroService;
 
 @SpringBootApplication
@@ -19,8 +20,7 @@ public class Pa2U2P5AgApplication implements CommandLineRunner {
 
 	@Autowired
 	private ILibroService libroService;
-	@Autowired
-	private IAutorService autorService;
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U2P5AgApplication.class, args);
@@ -30,79 +30,45 @@ public class Pa2U2P5AgApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		//Creamos dos libros
-		Libro l1= new Libro();
+		Libro2 l1= new Libro2();
+		l1.setTitulo("JAVA2");
+		l1.setFechaPublicacion(LocalDateTime.now());
 		
-		l1.setTitulo("Cien años de soledad");
-		l1.setFechaPublicacion(LocalDateTime.of(1969, 1, 1, 12, 0));
-		
-		Libro l2= new Libro();
-		
-		l1.setTitulo("El Amor en los tiempos de cólera");
-		l1.setFechaPublicacion(LocalDateTime.of(1985, 1, 1, 12, 0));
 		//Creamos un autor
-		Autor a1 = new Autor();
-		a1.setNacionalidad("Colombiano");
-		a1.setNombre("Gabriel Garcia Marquez");
+		Autor2 a1 = new Autor2();
+		a1.setNacionalidad("Ecuatoriano2");
+		a1.setNombre("Pepito Perez2");
 		
-		Set<Libro>libros=new HashSet<Libro>();
-		libros.add(l1);
-		libros.add(l2);
+		Autor2 a2 = new Autor2();
+		a2.setNacionalidad("Ecuatoriano2");
+		a2.setNombre("Daniel Teran2");
 		
-		Set<Autor>autores=new HashSet<Autor>();
+		
+		List<Autor2>autores=new ArrayList<Autor2>();
 		autores.add(a1);
+		autores.add(a2);
 		
-		a1.setLibros(libros);
-		l1.setAutores(autores);
+		AutorLibro autorLibro1= new AutorLibro();
+		autorLibro1.setLibro2(l1);
+		autorLibro1.setAutor2(a1);
+		autorLibro1.setFecha(LocalDateTime.now());
 		
-		this.autorService.guardar(a1);
+		AutorLibro autorLibro2= new AutorLibro();
+		autorLibro2.setLibro2(l1);
+		autorLibro2.setAutor2(a2);
+		autorLibro2.setFecha(LocalDateTime.now());
 		
-		//Ingresar un libro con libroService
-		Libro l3= new Libro();
+		List <AutorLibro>lista = new ArrayList<>();
+		lista.add(autorLibro1);
+		lista.add(autorLibro2);
 		
-		l3.setTitulo("Divina Comedia");
-		l3.setFechaPublicacion(LocalDateTime.of(1265, 1, 1, 12, 0));
+		l1.setAutoresLibros(lista);
 		
-		Autor a2 = new Autor();
-		a2.setNacionalidad("Italiano");
-		a2.setNombre("Dante Alighieri");
-		
-		Autor a3 = new Autor();
-		a3.setNacionalidad("Ecuatoriano");
-		a3.setNombre("Juan Leon Mera");
-		
-		
-		//Hacemos una coleccion de los autores
-		Set<Autor>autores2=new HashSet<Autor>();
-		autores2.add(a2);
-		autores2.add(a3);
-		
-		l3.setAutores(autores2);
-		
-		//Hacemos una coleccion de los libros
-		Set<Libro>libros2=new HashSet<Libro>();
-		libros2.add(l3);
-		
-		a2.setLibros(libros2);
-		a3.setLibros(libros2);
-		
-		this.libroService.guardar(l3);
+		//this.libroService.guardar(l1);
+		Libro l2=this.libroService.buscarrPorNombre("JAVA para principiantes");
+		System.out.println(l2);
 		
 		
-		
-		// Buscar y Actualizar libro 
-		
-		Libro l4=this.libroService.buscar(2);
-		l4.setTitulo("JAVA para principiantes");
-		this.libroService.actualizar(l4);
-		
-		//Borrar un autor
-		
-		this.autorService.borrar(a3.getId());
-		// Buscar y Actualizar Autor
-		
-		Autor a4 = this.autorService.buscar(3);
-		a4.setNacionalidad("Chileno");
-		this.autorService.actualizar(a4);
 		
 		
 	}

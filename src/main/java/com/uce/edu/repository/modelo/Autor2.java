@@ -7,13 +7,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
-//@Entity
-//@Table(name = "autor2")
+@Entity
+@Table(name = "autor2")
 //Tabla Principal
-public class Autor2 {/*
+public class Autor2 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_autor2")
 	@SequenceGenerator(name = "seq_autor2", sequenceName = "seq_autor2", allocationSize = 1)
@@ -26,6 +27,7 @@ public class Autor2 {/*
 	@Column(name = "auto_nacionalidad")
 	private String nacionalidad;
 	
+	@OneToMany(mappedBy = "autor2")
 	private List<AutorLibro>autoresLibros;
 	
 	public Integer getId() {
@@ -59,6 +61,5 @@ public class Autor2 {/*
 	public void setAutoresLibros(List<AutorLibro> autoresLibros) {
 		this.autoresLibros = autoresLibros;
 	}
-	*/
 	
 }

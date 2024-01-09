@@ -1,6 +1,7 @@
 package com.uce.edu.service;
 
 import com.uce.edu.repository.modelo.Libro;
+import com.uce.edu.repository.modelo.Libro2;
 
 public interface ILibroService {
 	
@@ -11,4 +12,8 @@ public interface ILibroService {
 	public void actualizar(Libro libro);
 
 	public void borrar(Integer id);
+	
+	public void guardar(Libro2 libro2);
+	
+	public Libro buscarrPorNombre(String nombre);
 }
