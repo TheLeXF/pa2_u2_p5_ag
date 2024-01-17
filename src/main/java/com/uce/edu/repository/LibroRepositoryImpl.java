@@ -85,7 +85,7 @@ public class LibroRepositoryImpl implements ILibroRepository {
 	@Override
 	public List<Libro> seleccionarPorFecha(LocalDateTime fechaPublicacion) {
 		// TODO Auto-generated method stub
-		TypedQuery<Libro> myQuery = this.entityManager
+		TypedQuery<Libro> myQuery = this.entityManager	
 				.createQuery("SELECT l FROM Libro l WHERE l.fechaPublicacion >= : fecha", Libro.class);
 		myQuery.setParameter("fecha", fechaPublicacion);
 		return myQuery.getResultList();

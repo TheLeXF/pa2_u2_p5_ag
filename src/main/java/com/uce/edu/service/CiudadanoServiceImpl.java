@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.uce.edu.repository.ICiudadanoRepository;
 import com.uce.edu.repository.modelo.Ciudadano;
+import com.uce.edu.repository.modelo.Empleado;
 @Service
 public class CiudadanoServiceImpl implements ICiudadanoService{
 	
@@ -29,6 +30,18 @@ public class CiudadanoServiceImpl implements ICiudadanoService{
 	@Override
 	public void borrar(Integer id) {
 		this.ciudadanoRepository.eliminar(id);
+	}
+
+	@Override
+	public Empleado buscarPorCedula(String cedula) {
+		// TODO Auto-generated method stub
+		return this.ciudadanoRepository.seleccionarPorCedula(cedula);
+	}
+
+	@Override
+	public Ciudadano buscarPorCedulaCiu(String cedula) {
+		// TODO Auto-generated method stub
+		return this.ciudadanoRepository.seleccionarPorCedulaCiu(cedula);
 	}
 	
 
