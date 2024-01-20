@@ -11,4 +11,10 @@ public interface IEstudianteService {
 	public void actualizar(Estudiante estudiante);
 
 	public void borrar(Integer id);
+	
+	public Estudiante seleccionarPorCedula(String cedula);
+	
+	public Estudiante seleccionarPorNombre(String nombre);
+	
+	
 }

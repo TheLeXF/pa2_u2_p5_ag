@@ -1,6 +1,8 @@
 package com.uce.edu.repository.modelo;
 
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +24,12 @@ public class Alumno {
 	@Column(name="alum_nombre")
 	private String nombre;
 	
+	@Column(name="alum_no_matricula")
+	private String noMatricula;
+	
+	@Column(name = "alum_fecha_matricula")
+	private LocalDateTime fechaMatricula;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -34,6 +42,21 @@ public class Alumno {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+	public String getNoMatricula() {
+		return noMatricula;
+	}
+	public void setNoMatricula(String noMatricula) {
+		this.noMatricula = noMatricula;
+	}
+	public LocalDateTime getFechaMatricula() {
+		return fechaMatricula;
+	}
+	public void setFechaMatricula(LocalDateTime fechaMatricula) {
+		this.fechaMatricula = fechaMatricula;
+	}
+	@Override
+	public String toString() {
+		return "Alumno [nombre=" + nombre + ", noMatricula=" + noMatricula + ", fechaMatricula=" + fechaMatricula + "]";
+	}
 	
 }

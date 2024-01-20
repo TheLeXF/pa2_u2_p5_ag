@@ -2,10 +2,12 @@ package com.uce.edu.repository;
 
 import org.springframework.stereotype.Repository;
 
+import com.uce.edu.repository.modelo.Autor;
 import com.uce.edu.repository.modelo.Habitacion;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 
 @Repository
@@ -38,6 +40,13 @@ public class HabitacionRepositoryImpl implements IHabitacionRepository {
 		// TODO Auto-generated method stub
 		Habitacion hab = this.seleccionar(id);
 		this.entityManager.remove(hab);
+	}
+
+	@Override
+	public Habitacion seleccionarPorNumero(String numero) {
+		Query myQuery=this.entityManager.createNativeQuery("SELECT * FROM habitacion c WHERE c.habi_numero = :numero",Habitacion.class);
+		myQuery.setParameter("numero", numero);
+		return (Habitacion)myQuery.getSingleResult();
 	}
 
 }

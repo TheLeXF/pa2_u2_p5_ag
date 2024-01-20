@@ -11,5 +11,9 @@ public interface IEstudianteRepository {
 	public void actualizar(Estudiante estudiante);
 
 	public void eliminar(Integer id);
-
+	
+	public Estudiante seleccionarPorCedula(String cedula);
+	
+	public Estudiante seleccionarPorNombre(String nombre);
+	
 }

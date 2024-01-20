@@ -30,5 +30,8 @@ public interface ILibroRepository {
 	
 	public List<Libro> seleccionarPorFechaNamed(LocalDateTime fechaPublicacion);
 	
+	public Libro seleccionarPorEditorial(String editorial);
+	
+	public List<Libro> seleccionarPorArea(String area);
 
 }

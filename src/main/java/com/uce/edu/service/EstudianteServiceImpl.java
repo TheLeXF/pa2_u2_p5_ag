@@ -36,6 +36,18 @@ public class EstudianteServiceImpl implements IEstudianteService {
 		this.estudianteRepository.eliminar(id);
 	}
 
+	@Override
+	public Estudiante seleccionarPorCedula(String cedula) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepository.seleccionarPorCedula(cedula);
+	}
+
+	@Override
+	public Estudiante seleccionarPorNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepository.seleccionarPorNombre(nombre);
+	}
+
 
 
 }

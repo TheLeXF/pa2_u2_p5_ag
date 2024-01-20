@@ -12,4 +12,6 @@ public interface IHabitacionService {
 	public void actualizar(Habitacion habitacion);
 
 	public void borrar(Integer id);
+	
+	public Habitacion buscarPorNumero(String numero);
 }

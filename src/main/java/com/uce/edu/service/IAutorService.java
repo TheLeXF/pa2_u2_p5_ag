@@ -12,4 +12,6 @@ public interface IAutorService {
 
 	public void borrar(Integer id);
 	
+	public Autor buscarPorNacionalidad(String nacionalidad);
+	
 }

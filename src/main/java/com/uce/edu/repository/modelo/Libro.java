@@ -32,7 +32,13 @@ public class Libro {
 
 	@Column(name = "libr_fecha_publicacion")
 	private LocalDateTime fechaPublicacion;
+	
+	@Column(name = "libr_editorial")
+	private String editorial;
 
+	@Column(name = "libr_area")
+	private String area;
+	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "autor_libro", joinColumns = @JoinColumn(name = "auli_id_libro"), // Secundaria
 			inverseJoinColumns = @JoinColumn(name = "auli_id_autor")) // Principal
@@ -62,6 +68,22 @@ public class Libro {
 		this.fechaPublicacion = fechaPublicacion;
 	}
 
+	public String getEditorial() {
+		return editorial;
+	}
+
+	public void setEditorial(String editorial) {
+		this.editorial = editorial;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
 	public Set<Autor> getAutores() {
 		return autores;
 	}
@@ -72,7 +94,10 @@ public class Libro {
 
 	@Override
 	public String toString() {
-		return "Libro [id=" + id + ", titulo=" + titulo + ", fechaPublicacion=" + fechaPublicacion + "]";
+		return "Libro [id=" + id + ", titulo=" + titulo + ", fechaPublicacion=" + fechaPublicacion + ", editorial="
+				+ editorial + ", area=" + area + "]";
 	}
 
+	
+	
 }

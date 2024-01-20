@@ -11,5 +11,7 @@ public interface IAutorRepository {
 	public void actualizar(Autor autor);
 
 	public void eliminar(Integer id);
+	
+	public Autor seleccionarPorNacionalidad(String nacionalidad);
 
 }
