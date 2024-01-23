@@ -13,6 +13,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 @Repository
@@ -121,5 +125,25 @@ public class LibroRepositoryImpl implements ILibroRepository {
 				.createQuery("SELECT l FROM Libro l WHERE l.area = : area", Libro.class);
 		myQuery.setParameter("area", area);
 		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Libro> seleccionarPorAreaOrEditorial(String area, String editorial, String titulo) {
+		
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Libro> myCriteriaQuery = myCriteria.createQuery(Libro.class);
+		Root<Libro> myFrom = myCriteriaQuery.from(Libro.class);
+		Predicate condicionTotal = null;
+		Predicate condicionArea = myCriteria.equal(myFrom.get("area"), area);
+		Predicate condicionTitulo = myCriteria.equal(myFrom.get("titulo"), titulo);
+		
+		if (area.equals("Programacion")) {
+			condicionTotal = myCriteria.or(condicionArea,condicionTitulo);
+		} else if (area.equals("Literatura")) {
+			condicionTotal = myCriteria.equal(myFrom.get("titulo"),titulo );
+		} 
+		myCriteriaQuery.select(myFrom).where(condicionTotal);
+		TypedQuery<Libro> myTypedQuery = this.entityManager.createQuery(myCriteriaQuery);
+		return myTypedQuery.getResultList();
 	}
 }

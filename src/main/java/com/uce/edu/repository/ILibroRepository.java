@@ -33,5 +33,6 @@ public interface ILibroRepository {
 	public Libro seleccionarPorEditorial(String editorial);
 	
 	public List<Libro> seleccionarPorArea(String area);
-
+	
+	public List<Libro> seleccionarPorAreaOrEditorial(String area, String editorial, String titulo);
 }

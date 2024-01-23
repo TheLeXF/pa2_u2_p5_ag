@@ -13,5 +13,7 @@ public interface IHotelRepository {
 	public void eliminar(Integer id);
 	
 	public Hotel seleccionarPorDireccion(String direccion);
+	
+	public Hotel seleccionarPorNombreDireccion(String nombre, String direccion);
 
 }

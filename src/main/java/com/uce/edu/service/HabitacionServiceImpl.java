@@ -41,4 +41,10 @@ public class HabitacionServiceImpl implements IHabitacionService {
 		// TODO Auto-generated method stub
 		return this.habitacionRepository.seleccionarPorNumero(numero);
 	}
+
+	@Override
+	public Habitacion buscarPorCriteria(String clase, String numero) {
+		// TODO Auto-generated method stub
+		return this.habitacionRepository.seleccionarPorCriteria(clase, numero);
+	}
 }

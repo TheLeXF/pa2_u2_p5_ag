@@ -2,12 +2,17 @@ package com.uce.edu.repository;
 
 import org.springframework.stereotype.Repository;
 
+import com.uce.edu.repository.modelo.Ciudadano;
 import com.uce.edu.repository.modelo.Estudiante;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 @Repository
@@ -57,4 +62,24 @@ public class EstudianteRepositoryImpl implements IEstudianteRepository {
 		myQuery.setParameter("nombre", nombre);
 		return myQuery.getSingleResult();
 	}
+
+	@Override
+	public Estudiante seleccionarPorNombreAndCedula(String nombre, String apellido, String cedula) {
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Estudiante> myCriteriaQuery = myCriteria.createQuery(Estudiante.class);
+		Root<Estudiante> myFrom = myCriteriaQuery.from(Estudiante.class);
+		Predicate condicionTotal = null;
+		Predicate condicionNombre = myCriteria.equal(myFrom.get("nombre"), nombre);
+		Predicate condicionCedula = myCriteria.equal(myFrom.get("cedula"), cedula);
+
+		if (apellido.startsWith("G")) {
+			condicionTotal = myCriteria.and(condicionNombre, condicionCedula);
+		} else {
+			condicionTotal = myCriteria.equal(myFrom.get("apellido"), apellido);
+		}
+		myCriteriaQuery.select(myFrom).where(condicionTotal);
+		TypedQuery<Estudiante> myTypedQuery = this.entityManager.createQuery(myCriteriaQuery);
+		return myTypedQuery.getSingleResult();
+	}
+
 }

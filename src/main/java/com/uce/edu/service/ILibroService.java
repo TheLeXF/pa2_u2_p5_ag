@@ -33,5 +33,7 @@ public interface ILibroService {
 	public Libro buscarPorEditorial(String editorial);
 
 	public List<Libro> buscarPorArea(String area);
+	
+	public List<Libro> buscarPorAreaOrEditorial(String area, String editorial, String titulo);
 
 }

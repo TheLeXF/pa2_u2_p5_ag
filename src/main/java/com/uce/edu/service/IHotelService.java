@@ -13,4 +13,6 @@ public interface IHotelService {
 	public void borrar(Integer id);
 
 	public Hotel buscarPorDireccion(String direccion);
+	
+	public Hotel buscarPorNombreDireccion(String nombre, String direccion);
 }

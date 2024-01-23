@@ -16,5 +16,5 @@ public interface IEstudianteService {
 	
 	public Estudiante seleccionarPorNombre(String nombre);
 	
-	
+	public Estudiante buscarPorNombreAndCedula(String nombre, String apellido, String cedula);
 }

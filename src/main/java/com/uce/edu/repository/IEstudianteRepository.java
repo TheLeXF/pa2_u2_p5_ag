@@ -16,4 +16,7 @@ public interface IEstudianteRepository {
 	
 	public Estudiante seleccionarPorNombre(String nombre);
 	
+	public Estudiante seleccionarPorNombreAndCedula(String nombre, String apellido, String cedula);
+
+	
 }

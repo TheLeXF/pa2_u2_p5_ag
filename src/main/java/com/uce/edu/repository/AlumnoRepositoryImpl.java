@@ -59,4 +59,6 @@ public class AlumnoRepositoryImpl implements IAlummnoRepository {
 		return myQuery.getResultList();
 	}
 	
+	
+	
 }

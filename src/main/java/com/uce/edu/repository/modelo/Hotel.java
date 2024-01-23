@@ -63,4 +63,9 @@ public class Hotel {
 		this.habitaciones = habitaciones;
 	}
 
+	@Override
+	public String toString() {
+		return "Hotel [nombre=" + nombre + ", direccion=" + direccion + "]";
+	}
+
 }

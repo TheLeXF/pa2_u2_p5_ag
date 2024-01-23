@@ -14,4 +14,7 @@ public interface IHabitacionRepository {
 	
 	public Habitacion seleccionarPorNumero(String numero);
 	
+	public Habitacion seleccionarPorCriteria(String clase, String numero);
+
+	
 }
